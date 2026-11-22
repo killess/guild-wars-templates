@@ -1,10 +1,12 @@
 # Copies the live Guild Wars templates (synced by OneDrive) into this repo's
-# Templates folder, making it an exact copy, then opens GitHub Desktop so the
+# 'Templates - Current' folder, making it an exact copy, then opens GitHub Desktop so the
 # changes can be committed and pushed.
 # Run it by double-clicking "Sync Templates.cmd".
 
 $source = Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'Guild Wars\Templates'
-$dest   = Join-Path $PSScriptRoot 'Templates'
+$dest   = Join-Path $PSScriptRoot 'Templates - Current'
+# 'Templates - Original' is a frozen copy of the pre-reorganization layout
+# and is never touched by this script.
 
 if (-not (Test-Path $source)) {
     Write-Host "Templates folder not found: $source" -ForegroundColor Red
@@ -24,7 +26,7 @@ if ($LASTEXITCODE -ge 8) {
 }
 
 Write-Host ''
-git -C $PSScriptRoot status --short --untracked-files=all -- Templates | Measure-Object |
+git -C $PSScriptRoot status --short --untracked-files=all -- 'Templates - Current' | Measure-Object |
     ForEach-Object { Write-Host "$($_.Count) template change(s) to commit (a moved file counts twice)." -ForegroundColor Green }
 
 $gh = Join-Path $env:LOCALAPPDATA 'GitHubDesktop\GitHubDesktop.exe'

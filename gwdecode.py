@@ -83,9 +83,9 @@ def main(root, skillfile, out):
 
 if __name__ == "__main__":
     # Usage: python gwdecode.py [templates_dir] [Skills.h] [output.json]
-    # Defaults: Templates, Skills.h and decoded.json next to this script.
+    # Defaults: 'Templates - Current', Skills.h and decoded.json next to this script.
     here = os.path.dirname(os.path.abspath(__file__))
-    defaults = [os.path.join(here, "Templates"),
+    defaults = [os.path.join(here, "Templates - Current"),
                 os.path.join(here, "Skills.h"),
                 os.path.join(here, "decoded.json")]
     args = sys.argv[1:4] + defaults[len(sys.argv[1:4]):]
